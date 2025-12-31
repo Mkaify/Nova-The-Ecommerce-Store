@@ -1,6 +1,6 @@
 # 🌟 Nova Threads
 
-**Nova Threads** is a modern, full-stack e-commerce application built with **React**, **TypeScript**, and **Supabase**. It features a complete shopping experience including product browsing, cart management, secure checkout, user authentication, and an admin dashboard for inventory management.
+**Nova Threads** is a modern, full-stack Fashion-Hub built with **React**, **TypeScript**, and **Supabase**. It features a complete shopping experience including product browsing, cart management, secure checkout, user authentication, and an admin dashboard for inventory management.
 
 ![Nova Threads Banner](https://images.unsplash.com/photo-1483985988355-763728e1935b?q=80&w=2070&auto=format&fit=crop)
 
@@ -118,7 +118,7 @@ ALTER TABLE "Products" ENABLE ROW LEVEL SECURITY;
 npm run dev
 ```
 
-Open [http://localhost:5173](https://www.google.com/search?q=http://localhost:5173) to view it in the browser.
+Open [http://localhost:5173](http://localhost:5173) to view it in the browser.
 
 
 ## 🤝 Contributing
@@ -145,4 +145,4 @@ Distributed under the MIT License. See `LICENSE` for more information.
 
 **Muhammad Kaif** - [LinkedIn Profile](https://www.linkedin.com/in/muhammad-kaif-ur-rehman-a54114256/) - kaifurrehman46@gmail.com
 
-Project Link: [https://github.com/mkaify/nova-threads](https://www.google.com/search?q=https://github.com/mkaify/nova-threads)s
+Project Link: [https://github.com/mkaify/nova-threads](https://github.com/mkaify/nova-threads)

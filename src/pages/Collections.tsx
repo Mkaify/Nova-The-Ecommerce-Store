@@ -1,14 +1,16 @@
-
 import { useState } from 'react';
 import Header from '../components/Header';
 import ProductGrid from '../components/ProductGrid';
 import Footer from '../components/Footer';
-import { products } from '../data/products';
+import { useProducts } from '@/hooks/useProducts'; // ✅ Use live data
+import { Loader2 } from 'lucide-react';
 
 const Collections = () => {
   const [collection, setCollection] = useState('all');
   
-  // Filter products based on collection type
+  // ✅ Fetch from Supabase
+  const { data: products = [], isLoading } = useProducts();
+  
   const filteredProducts = collection === 'all' 
     ? products 
     : products.filter(product => product.category === collection);
@@ -22,34 +24,36 @@ const Collections = () => {
           
           <div className="mb-8">
             <div className="flex flex-wrap gap-2">
-              <button 
-                onClick={() => setCollection('all')}
-                className={`px-4 py-2 rounded-full text-sm ${collection === 'all' ? 'bg-black text-white' : 'bg-gray-100'}`}
-              >
-                All Collections
-              </button>
-              <button 
-                onClick={() => setCollection('clothing')}
-                className={`px-4 py-2 rounded-full text-sm ${collection === 'clothing' ? 'bg-black text-white' : 'bg-gray-100'}`}
-              >
-                Spring/Summer
-              </button>
-              <button 
-                onClick={() => setCollection('accessories')}
-                className={`px-4 py-2 rounded-full text-sm ${collection === 'accessories' ? 'bg-black text-white' : 'bg-gray-100'}`}
-              >
-                Fall/Winter
-              </button>
-              <button 
-                onClick={() => setCollection('shoes')}
-                className={`px-4 py-2 rounded-full text-sm ${collection === 'shoes' ? 'bg-black text-white' : 'bg-gray-100'}`}
-              >
-                Limited Edition
-              </button>
+              {[
+                { id: 'all', label: 'All Collections' },
+                { id: 'clothing', label: 'Spring/Summer' },
+                { id: 'accessories', label: 'Fall/Winter' },
+                { id: 'shoes', label: 'Limited Edition' }
+              ].map((btn) => (
+                <button 
+                  key={btn.id}
+                  onClick={() => setCollection(btn.id)}
+                  className={`px-4 py-2 rounded-full text-sm transition-colors ${
+                    collection === btn.id ? 'bg-black text-white' : 'bg-gray-100 hover:bg-gray-200'
+                  }`}
+                >
+                  {btn.label}
+                </button>
+              ))}
             </div>
           </div>
           
-          <ProductGrid products={filteredProducts} />
+          {isLoading ? (
+            <div className="flex justify-center py-20">
+              <Loader2 className="h-10 w-10 animate-spin text-gray-400" />
+            </div>
+          ) : filteredProducts.length > 0 ? (
+            <ProductGrid products={filteredProducts} />
+          ) : (
+            <div className="text-center py-20 bg-gray-50 rounded-lg">
+              <p className="text-gray-500">No products found in this collection.</p>
+            </div>
+          )}
         </div>
       </main>
       <Footer />
